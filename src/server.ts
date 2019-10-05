@@ -1,9 +1,9 @@
-import * as express from "express"
+import App from './app';
+import AuthenticationController from './authentication/auth.controller';
 
-const app = express()
 
-app.listen(8000, () => console.log("Server running on 8000 with auto restart!"))
+const app = new App([
+  new AuthenticationController()
+]);
 
-app.get("/", (req, res) => {
-    res.send("Lets show why breakpoints rock!")
-})
+app.listen();
