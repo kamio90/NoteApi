@@ -30,7 +30,7 @@ class ReviewController implements Controller {
 
     private getAllReview = async (req: express.Request, res: express.Response) => {
         const reviews = await this.review.find()
-        .populate('userId', '-password');
+            .populate('userId', '-password');
         res.send(reviews);
     }
 
@@ -47,7 +47,9 @@ class ReviewController implements Controller {
     private modifyReview = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         const id = req.params.id;
         const reviewData: Review = req.body;
-        const singleReview = await this.review.findByIdAndUpdate(id, reviewData, {new: true});
+        const singleReview = await this.review.findByIdAndUpdate(id, reviewData, {
+            new: true
+        });
         if (singleReview) {
             res.send(singleReview);
         } else {
@@ -55,7 +57,7 @@ class ReviewController implements Controller {
         }
     }
 
-    private createReview =  async (req: RequestWithUser, res: express.Response) => {
+    private createReview = async (req: RequestWithUser, res: express.Response) => {
         const reviewData: CreateReviewDto = req.body;
         const createdReview = new this.review({
             ...reviewData,

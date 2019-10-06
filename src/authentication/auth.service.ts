@@ -12,7 +12,7 @@ class AuthenticationService {
     public user = userModel;
 
     public async register(userData: CreateUserDto) {
-        if(
+        if (
             await this.user.findOne({
                 email: userData.email
             })
@@ -46,7 +46,9 @@ class AuthenticationService {
         };
         return {
             expiresIn,
-            token: jwt.sign(dataStoredInToken, secret, {expiresIn})
+            token: jwt.sign(dataStoredInToken, secret, {
+                expiresIn
+            })
         }
     }
 
